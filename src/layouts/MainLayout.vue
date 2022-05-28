@@ -11,11 +11,11 @@
         <img alt="Icone Plans" src="~assets/Plans.svg" />
         <span>Plans</span>
       </q-route-tab>
-      <q-route-tab name="maps" to="/page">
+      <q-route-tab name="maps" to="/page" active-color="blue-grey-1">
         <img alt="Icone Maps" src="~assets/Maps.svg" />
         <span>Maps</span>
       </q-route-tab>
-      <q-route-tab name="order" to="/">
+      <q-route-tab name="order" to="/page2">
         <img alt="Icone Order" src="~assets/Order.svg" />
         <span>Order</span>
       </q-route-tab>
@@ -35,13 +35,24 @@
   z-index: 2;
   background: #fff;
   padding: 0.5rem;
+  box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.13);
+  border-radius: 32px 32px 0px 0px;
 }
 .menuBar * {
   color: #98999a;
+  font-size: 0.7rem;
+  text-transform: capitalize;
 }
 img {
   width: auto;
-  height: 20;
+  height: 25px;
+  margin-bottom: 5px;
+}
+.q-tab--active * {
+  color: #72c1ec;
+  font-weight: bold;
+  filter: brightness(0) saturate(100%) invert(79%) sepia(42%) saturate(2481%)
+    hue-rotate(174deg) brightness(103%) contrast(85%);
 }
 </style>
 
@@ -56,10 +67,6 @@ export default defineComponent({
       tab: "plans",
     };
   },
-  watch: {
-    tab(value) {
-      console.log(value);
-    },
-  },
+  watch: {},
 });
 </script>
