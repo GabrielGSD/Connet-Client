@@ -49,10 +49,9 @@ img {
   margin-bottom: 5px;
 }
 .q-tab--active * {
-  color: #72c1ec;
   font-weight: bold;
-  filter: brightness(0) saturate(100%) invert(79%) sepia(42%) saturate(2481%)
-    hue-rotate(174deg) brightness(103%) contrast(85%);
+  filter: brightness(0) saturate(100%) invert(59%) sepia(41%) saturate(622%)
+    hue-rotate(141deg) brightness(88%) contrast(88%);
 }
 </style>
 
@@ -60,7 +59,7 @@ img {
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  name: "MainLayout",
+  name: "MenuBar",
 
   data() {
     return {

@@ -1,4 +1,20 @@
 // app global css in SCSS form
 .q-tab__indicator {
-  color: #72c1ec !important;
+  color: #3aa2b3 !important;
+}
+body {
+  background-color: #f4f6f9;
+}
+
+.cardAzul {
+  background: url("../assets/Efeito.png"),
+    radial-gradient(
+      90.16% 143.01% at 15.32% 21.04%,
+      rgba(165, 239, 255, 0.7) 0%,
+      rgba(110, 191, 244, 0.2) 77.08%,
+      rgba(70, 144, 213, 0.02) 100%
+    );
+  background-blend-mode: overlay, normal;
+  // filter: drop-shadow(3px 4px 6px rgba(109, 109, 109, 0.25));
+  border-radius: 20px;
 }
