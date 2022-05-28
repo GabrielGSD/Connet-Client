@@ -1,9 +1,22 @@
-// app global css in SCSS form
-.q-tab__indicator {
-  color: #3aa2b3 !important;
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
 body {
   background-color: #f4f6f9;
+  font-family: "Roboto", sans-serif;
+  color: #303030;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  padding: 1.5rem;
+  padding-left: 15px;
+}
+
+.q-tab__indicator {
+  color: #3aa2b3 !important;
 }
 
 .cardAzul {
@@ -15,6 +28,30 @@ body {
       rgba(70, 144, 213, 0.02) 100%
     );
   background-blend-mode: overlay, normal;
-  // filter: drop-shadow(3px 4px 6px rgba(109, 109, 109, 0.25));
+  box-shadow: 3px 4px 6px rgba(109, 109, 109, 0.25);
   border-radius: 20px;
+  width: 80px !important;
+  height: 110px !important;
+}
+
+.types {
+  padding: 10px;
+}
+
+.types .swiper-wrapper {
+  margin-left: -55px !important;
+  justify-content: center !important;
+}
+
+.plans {
+  background: #fff;
+  box-shadow: 3px 4px 6px rgba(109, 109, 109, 0.35);
+  border-radius: 0 0 20px 20px;
+}
+
+.boxTitle {
+  background: linear-gradient(315deg, #8bdfed 0%, #3baeef 100%);
+  color: #fff;
+  box-shadow: 3px 4px 6px rgba(109, 109, 109, 0.35);
+  border-radius: 0 0 20px 20px;
 }

@@ -50,8 +50,8 @@ img {
 }
 .q-tab--active * {
   font-weight: bold;
-  filter: brightness(0) saturate(100%) invert(59%) sepia(41%) saturate(622%)
-    hue-rotate(141deg) brightness(88%) contrast(88%);
+  filter: brightness(0) saturate(100%) invert(63%) sepia(73%) saturate(1926%)
+    hue-rotate(173deg) brightness(96%) contrast(96%);
 }
 </style>
 
