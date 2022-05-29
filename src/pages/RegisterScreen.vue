@@ -89,9 +89,6 @@
 								label="Celular"
 								:rules="[(val) => !!val || 'Field is required']"
 							/>
-						</q-item-section>
-
-						<q-item-section side center>
 							<q-btn
 								to="/"
 								round
@@ -99,6 +96,12 @@
 								color="blue-3"
 								class="q-mt-lg bg-white"
 								icon="arrow_right_alt"
+								style="
+									width: 42px;
+									height: 42px;
+									margin: 0 auto;
+									margin-top: 20px;
+								"
 							></q-btn>
 						</q-item-section>
 					</q-item>
