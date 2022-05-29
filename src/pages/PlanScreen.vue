@@ -254,7 +254,6 @@ export default defineComponent({
 		return {
 			modules: [Pagination],
 			planSelected: "Satélite",
-			arrFazendaFiltrada: [],
 		};
 	},
 	setup() {},
