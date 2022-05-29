@@ -15,7 +15,7 @@
         <img alt="Icone Maps" src="~assets/Maps.svg" />
         <span>Maps</span>
       </q-route-tab>
-      <q-route-tab name="order" to="/page2">
+      <q-route-tab name="order" to="/order">
         <img alt="Icone Order" src="~assets/Order.svg" />
         <span>Order</span>
       </q-route-tab>

@@ -16,7 +16,7 @@ body {
 }
 
 .q-tab__indicator {
-  color: #3aa2b3 !important;
+  color: #3caef0 !important;
 }
 
 .cardAzul {
@@ -53,5 +53,13 @@ body {
   background: linear-gradient(315deg, #8bdfed 0%, #3baeef 100%);
   color: #fff;
   box-shadow: 3px 4px 6px rgba(109, 109, 109, 0.35);
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 30px 30px;
+}
+.plans .swiper-pagination {
+  bottom: 12px !important;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
