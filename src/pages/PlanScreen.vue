@@ -20,8 +20,9 @@
 				>
 					<swiper-slide
 						class="cardPlans shadow-2"
-						v-for="index in 5"
-						:key="index"
+						v-for="plan in this.plans"
+						:key="plan"
+						@click="selectPlan(plan['id'])"
 					>
 						<img
 							alt="Icone Satelite"
@@ -33,11 +34,11 @@
 							class="title"
 							style="font-size: 2rem; font-weight: bold"
 						>
-							Viasat
+							{{ plan['isp'] }}
 						</h1>
 						<div class="row">
 							<div class="cardPlanDetail" style="color: #26c6ba">
-								<h1>10Gb</h1>
+								<h1>{{ plan['download_speed'] }}</h1>
 								<h2>Download</h2>
 								<img
 									alt="Icone download"
@@ -49,8 +50,8 @@
 								class="cardPlanDetail"
 								style="color: #ffa217; margin: 0 10px"
 							>
-								<h1>1.5Gb</h1>
-								<h2>Download</h2>
+								<h1>{{ plan['upload_speed'] }}</h1>
+								<h2>Upload</h2>
 								<img
 									alt="Icone upload"
 									src="~assets/upload.svg"
@@ -58,7 +59,7 @@
 								/>
 							</div>
 							<div class="cardPlanDetail" style="color: #17acff">
-								<h1>200,00</h1>
+								<h1>{{ plan['price_per_month'] }}</h1>
 								<h2>Mensal</h2>
 								<img
 									alt="Icone real"
@@ -86,9 +87,7 @@
 								text-align: justify;
 							"
 						>
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Assumenda repellat ea quaerat ab
-							exercitationem!
+							{{ plan['description'] }}
 						</p>
 					</swiper-slide>
 				</swiper>
@@ -110,8 +109,11 @@
 				:modules="modules"
 			>
 				<swiper-slide
+					v-for="index in this.plans"
+					:key="index"
 					class="slide cardAzul"
 					@click="this.planSelected = 'Satélite'"
+
 				>
 					<div class="centerObj">
 						<img
@@ -119,46 +121,10 @@
 							src="~assets/Sat.svg"
 							style="height: 40px"
 						/>
-						<p>Satélite</p>
-					</div>
-				</swiper-slide>
-				<swiper-slide
-					class="slide cardAzul"
-					@click="this.planSelected = 'Cabo'"
-				>
-					<div class="centerObj">
-						<img
-							alt="Icone Cabo"
-							src="~assets/Cab.svg"
-							style="height: 40px"
-						/>
-						<p>Cabo</p>
-					</div>
-				</swiper-slide>
-				<swiper-slide
-					class="slide cardAzul"
-					@click="this.planSelected = 'Rádio'"
-				>
-					<div class="centerObj">
-						<img
-							alt="Icone Radio"
-							src="~assets/Rad.svg"
-							style="height: 40px"
-						/>
-						<p>Radio</p>
-					</div>
-				</swiper-slide>
-				<swiper-slide
-					class="slide cardAzul"
-					@click="this.planSelected = 'Fibra'"
-				>
-					<div class="centerObj">
-						<img
-							alt="Icone Wire"
-							src="~assets/Wir.svg"
-							style="height: 40px"
-						/>
-						<p>Cabo</p>
+						<p v-if="index['type_of_internet'] === 'sat'">Satélite</p>
+						<p v-else-if="index['type_of_internet'] === 'wire'">Fibra</p>
+						<p v-else-if="index['type_of_internet'] === 'radio'">Rádio</p>
+						<p v-else-if="index['type_of_internet'] === 'cable'">Cabo</p>
 					</div>
 				</swiper-slide>
 			</swiper>
@@ -170,7 +136,7 @@
 .boxSwiper {
 	position: absolute;
 	bottom: 73px;
-	max-width: 100vw;
+	width: 100vw;
 }
 .swiper {
 	max-width: 100vw;
@@ -219,6 +185,7 @@
 	border: 2px solid;
 	padding: 15px 5px;
 	border-radius: 0.5rem;
+	min-width: 80px;
 }
 .cardPlanDetail h1 {
 	margin: 0;
@@ -239,10 +206,13 @@
 import { defineComponent } from "vue";
 import SwiperClass, { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import uniq from 'lodash/uniq';
 
 // import swiper module styles
 import "swiper/css";
 import "swiper/css/pagination";
+import Installers from "src/service/installers";
+import Plan from "src/service/Plan";
 
 export default defineComponent({
 	name: "PlanScreen",
@@ -254,7 +224,20 @@ export default defineComponent({
 		return {
 			modules: [Pagination],
 			planSelected: "Satélite",
+			plans:[],
+			planType:[]
 		};
+	},
+	methods:{
+		selectPlan(planId){
+			localStorage.setItem("planId", JSON.stringify(planId))
+			this.$router.push('/map')
+		}
+	},
+	mounted() {
+		Plan.listPlanUf(JSON.parse(localStorage.getItem('clientDados'))['state'])
+			.then(response => (this.plans = response.data))
+			.catch(error => console.log(error))
 	},
 	setup() {},
 });

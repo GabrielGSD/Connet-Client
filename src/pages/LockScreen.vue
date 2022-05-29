@@ -57,7 +57,7 @@
 							</template>
 						</q-input>
 						<q-btn
-							to="/"
+							@click="login()"
 							round
 							flat
 							color="blue-3"
@@ -85,6 +85,7 @@
 <script>
 import { defineComponent } from "vue";
 import { ref } from "vue";
+import {post} from "axios";
 
 export default defineComponent({
 	name: "LockScreen",
@@ -96,6 +97,15 @@ export default defineComponent({
 			isPwd: ref("password"),
 			isEmail: ref("email"),
 		};
+	},
+	methods: {
+		async login() {
+			const response = await post("https://connet-app.herokuapp.com/connet-app/api/connet/v1/client/clients/login?email="+this.email+"&password="+this.password);
+			if (response.status === 200){
+				localStorage.setItem("clientDados", JSON.stringify(response.data));
+				this.$router.push('/')
+			}
+		}
 	},
 	watch: {
 		email: function (mail) {

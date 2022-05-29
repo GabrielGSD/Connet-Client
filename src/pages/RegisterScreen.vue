@@ -86,6 +86,17 @@
 								dark
 								color="white"
 								dense
+								v-model="user.state"
+								label="Estado (Ex: MG, SP, etc.) "
+								:rules="[(val) => !!val || 'Field is required']"
+							/>
+
+							<p>{{ this.state }}</p>
+
+							<q-input
+								dark
+								color="white"
+								dense
 								type="number"
 								v-model="user.phone"
 								mask="(##) # ####-####"
@@ -93,7 +104,7 @@
 								:rules="[(val) => !!val || 'Field is required']"
 							/>
 							<q-btn
-								to="/"
+								@click="register()"
 								round
 								flat
 								color="blue-3"
@@ -135,16 +146,26 @@
 <script>
 import { defineComponent } from "vue";
 import { ref } from "vue";
+import {post} from "axios";
+
 
 export default defineComponent({
 	name: "RegisterScreen",
 
 	data() {
 		return {
-			user: { name: "", email: "", password: "", address: "", phone: "" },
+			user: { name: "", email: "", password: "", address: "", phone: "", state: "" },
 			model: "",
 			isPwd: ref("user.password"),
 		};
+	},
+	methods:{
+		async register() {
+			const response = await post("https://connet-app.herokuapp.com/connet-app/api/connet/v1/client/clients/", this.user);
+			if (response.status === 201){
+				this.$router.push('/Login')
+			}
+		}
 	},
 	watch: {
 		email: function (mail) {

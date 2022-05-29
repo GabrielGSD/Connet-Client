@@ -15,7 +15,7 @@ const routes = [
 			{
 				path: "/profile",
 				component: () => import("src/pages/UserProfile.vue"),
-			},
+			}
 		],
 	},
 

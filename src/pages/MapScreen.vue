@@ -72,7 +72,7 @@
 					<div class="row lineInfo">
 						<p class="infoClient">
 							<img src="~assets/local.svg" style="width: 18px" />
-							{{ installerSel.final_distance }}
+							{{ installerSel.price_per_km }}
 						</p>
 						<div class="infoClient">
 							<img
@@ -85,7 +85,7 @@
 										contrast(85%);
 								"
 							/>
-							{{ installerSel.final_price }}
+							{{ installerSel.price_per_km }}
 						</div>
 					</div>
 
@@ -213,9 +213,17 @@ export default defineComponent({
 		};
 	},
 	mounted() {
-		Installers.listFullInstallers()
-			.then((response) => (this.markers = response.data))
-			.catch((error) => console.log(error));
+		if(localStorage.getItem("planId") != null){
+			Installers.listInstallers(localStorage.getItem("planId"))
+				.then((response) => (this.markers = response.data))
+				.catch((error) => console.log(error));
+			console.log(this.markers)
+		} else {
+			Installers.listFullInstallers()
+				.then((response) => (this.markers = response.data))
+				.catch((error) => console.log(error));
+		}
+
 	},
 	methods: {
 		openCard(position) {
