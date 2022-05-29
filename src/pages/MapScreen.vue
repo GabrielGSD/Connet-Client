@@ -11,9 +11,14 @@
 			   style="width: 100%; height: 100vh" :center="center" :zoom="12"
 			   :zoomControl="false" :streetViewControl="true" :mapTypeControl="false"
 			   :fullscreenControl="false">
-		<div class="installers" v-for="(location, i) in locations" :key="i" :options="{ position: location }">
+		<div class="installers">  <!-- v-for="(location, i) in locations" :key="i" :options="{ position: location }"-->
 			<div class="card-installer">
-				<p>TESTE</p>
+				<button @click="locatorButtonPressed">
+					Pegar Lat e lon
+				</button>
+				<p>
+					LAT E LONGITUDE ESTÁ NO CONSOLE
+				</p>
 			</div>
 		</div>
 		<MarkerCluster>
@@ -30,6 +35,8 @@
 
 		</MarkerCluster>
 	</GoogleMap>
+
+
 </template>
 
 <style scoped>
@@ -59,8 +66,7 @@ export default defineComponent({
 	components: { GoogleMap, Marker, InfoWindow },
 	setup() {
 		const openedMarkerID = null
-		const center = { lat: -31.56391, lng: 147.154312 }
-
+		const center = {lat: -31.56391, lng: 147.154312}
 		const locations = [
 			{ lat: -31.56391, lng: 147.154312 },
 			{ lat: -33.718234, lng: 150.363181 },
@@ -86,8 +92,10 @@ export default defineComponent({
 			{ lat: -42.735258, lng: 147.438 },
 			{ lat: -43.999792, lng: 170.463352 },
 		]
+		let latitude = null
+		let longitude = null
 
-		return { center, locations, openedMarkerID}
+		return { center, locations, openedMarkerID, latitude, longitude}
 	},
 	methods: {
 		debug (event) {
@@ -96,7 +104,20 @@ export default defineComponent({
 		openMarker(id) {
 			this.openedMarkerID = id
 			console.log(this.openedMarkerID)
-		}
+		},
+		locatorButtonPressed() {
+			navigator.geolocation.getCurrentPosition(
+				position => {
+					this.latitude = position.coords.latitude
+					this.longitude = position.coords.longitude
+					console.log(this.latitude);
+					console.log(this.longitude);
+				},
+				error => {
+					console.log(error.message);
+				},
+			)
+		},
 	}
 });
 </script>
