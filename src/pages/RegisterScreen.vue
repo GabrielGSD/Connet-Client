@@ -2,7 +2,10 @@
 	<q-layout class="bg-image" v-cloak>
 		<q-page-container>
 			<q-page class="flex flex-center" style="flex-direction: column">
-				<h1 class="title" style="color: #fff; font-size: 2.3rem">
+				<h1
+					class="title"
+					style="color: #fff; font-size: 2.3rem; text-align: center"
+				>
 					Cadastro
 				</h1>
 				<q-item-section avatar>

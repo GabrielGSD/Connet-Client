@@ -3,6 +3,16 @@
 		<q-page-container>
 			<q-page class="flex flex-center">
 				<q-card class="bg-transparent no-border no-shadow">
+					<h1
+						class="title"
+						style="
+							color: #fff;
+							font-size: 2.3rem;
+							text-align: center;
+						"
+					>
+						Login
+					</h1>
 					<q-card-section class="text-center">
 						<q-avatar
 							size="130px"
