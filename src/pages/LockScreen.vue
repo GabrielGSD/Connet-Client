@@ -9,7 +9,7 @@
           <q-item>
             <q-item-section avatar>
               <q-avatar size="130px" class="shadow-10">
-                <img src="profile.svg" />
+                <img src="Profile.svg" />
               </q-avatar>
             </q-item-section>
 
@@ -51,18 +51,24 @@
           class="bg-transparent no-border no-shadow"
         >
           <q-card-section class="text-center">
-            <q-avatar size="130px" class="shadow-10">
-              <img src="profile.svg" />
+            <q-avatar size="130px" class="shadow-10" style="background: #fff">
+              <img src="~assets/Profile.svg" style="width: 45px" />
             </q-avatar>
           </q-card-section>
           <q-card-section class="text-center">
-            <div class="text-h6 text-white">Pratik Patel</div>
+            <q-input
+              dark
+              v-model="user"
+              color="white"
+              type="text"
+              placeholder="Entre com o usuário"
+            />
             <q-input
               dark
               v-model="password"
               color="white"
               :type="isPwd ? 'password' : 'text'"
-              placeholder="Enter Password"
+              placeholder="Entre com a senha"
             >
               <template v-slot:append>
                 <q-icon
@@ -76,8 +82,8 @@
               to="/"
               round
               flat
-              color="white"
-              class="q-mt-lg bg-blue-5"
+              color="blue-3"
+              class="q-mt-lg bg-white"
               icon="arrow_right_alt"
             ></q-btn>
           </q-card-section>
@@ -96,8 +102,10 @@ export default defineComponent({
 
   setup() {
     return {
+      user: ref(""),
       password: ref(""),
       isPwd: ref("password"),
+      isUsr: ref("user"),
     };
   },
 });

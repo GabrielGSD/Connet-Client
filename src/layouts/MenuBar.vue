@@ -19,7 +19,7 @@
         <img alt="Icone Order" src="~assets/Order.svg" />
         <span>Order</span>
       </q-route-tab>
-      <q-route-tab name="profile" to="/map">
+      <q-route-tab name="profile" to="/Login">
         <img alt="Icone Profile" src="~assets/Profile.svg" />
         <span>Profile</span>
       </q-route-tab>
