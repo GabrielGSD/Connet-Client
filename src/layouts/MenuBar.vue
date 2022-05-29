@@ -11,7 +11,7 @@
         <img alt="Icone Plans" src="~assets/Plans.svg" />
         <span>Plans</span>
       </q-route-tab>
-      <q-route-tab name="maps" to="/page" active-color="blue-grey-1">
+      <q-route-tab name="maps" to="/map" active-color="blue-grey-1">
         <img alt="Icone Maps" src="~assets/Maps.svg" />
         <span>Maps</span>
       </q-route-tab>
@@ -19,7 +19,7 @@
         <img alt="Icone Order" src="~assets/Order.svg" />
         <span>Order</span>
       </q-route-tab>
-      <q-route-tab name="profile" to="/page">
+      <q-route-tab name="profile" to="/map">
         <img alt="Icone Profile" src="~assets/Profile.svg" />
         <span>Profile</span>
       </q-route-tab>

@@ -34,7 +34,7 @@
 import { defineAsyncComponent, defineComponent } from "vue";
 
 export default defineComponent({
-  name: "PageThree",
+  name: "OrderScreen",
   components: {
     CardOrder: defineAsyncComponent(() => import("components/CardOrder")),
   },

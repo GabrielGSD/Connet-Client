@@ -225,7 +225,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 export default defineComponent({
-  name: "PageTwo",
+  name: "PlanScreen",
   components: {
     Swiper,
     SwiperSlide,
