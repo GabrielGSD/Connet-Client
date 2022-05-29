@@ -90,7 +90,7 @@ export default defineComponent({
 		}
 	},
 	mounted() {
-		Installers.listFullInstallers()
+		Installers.listInstallers(2)
 			.then(response => (this.markers = response.data))
 			.catch(error => console.log(error))
 	},
