@@ -181,7 +181,6 @@
 }
 .plans .swiper-slide {
   max-height: 90%;
-  border: 1.5px solid #a8a9a9;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
