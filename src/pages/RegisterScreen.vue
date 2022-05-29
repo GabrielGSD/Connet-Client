@@ -108,6 +108,17 @@
 							></q-btn>
 						</q-item-section>
 					</q-item>
+					<span
+						@click="$router.push('/Login')"
+						style="
+							color: #fff;
+							display: inline-block;
+							width: 100%;
+							text-align: center;
+							margin-top: 15px;
+						"
+						>Realizar Login</span
+					>
 				</q-card>
 			</q-page>
 		</q-page-container>

@@ -65,6 +65,17 @@
 							icon="arrow_right_alt"
 						></q-btn>
 					</q-card-section>
+
+					<span
+						@click="$router.push('/Register')"
+						style="
+							color: #fff;
+							display: inline-block;
+							width: 100%;
+							text-align: center;
+						"
+						>Cadastrar conta?</span
+					>
 				</q-card>
 			</q-page>
 		</q-page-container>
