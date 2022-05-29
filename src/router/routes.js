@@ -19,6 +19,10 @@ const routes = [
     path: "/Login",
     component: () => import("pages/LockScreen.vue"),
   },
+  {
+    path: "/Register",
+    component: () => import("pages/RegisterScreen.vue"),
+  },
 ];
 
 export default routes;
