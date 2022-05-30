@@ -72,7 +72,7 @@
 					<div class="row lineInfo">
 						<p class="infoClient">
 							<img src="~assets/local.svg" style="width: 18px" />
-							{{ installerSel.price_per_km }}
+							{{ this.dist }}
 						</p>
 						<div class="infoClient">
 							<img
@@ -85,7 +85,7 @@
 										contrast(85%);
 								"
 							/>
-							{{ installerSel.price_per_km }}
+							{{ this.dist *  installerSel.price_per_km}}
 						</div>
 					</div>
 
@@ -93,6 +93,7 @@
 
 					<div class="row lineInfo">
 						<q-btn
+							@click="contratar()"
 							label="Contratar"
 							style="
 								background: #3caef0;
@@ -174,6 +175,7 @@ import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 // import swiper module styles
 import "swiper/css";
 import "swiper/css/pagination";
+import {post} from "axios";
 
 export default defineComponent({
 	name: "MapScreen",
@@ -210,6 +212,7 @@ export default defineComponent({
 			markers: null,
 			zoom: 5,
 			installerSel: {},
+			dist:null
 		};
 	},
 	mounted() {
@@ -226,6 +229,21 @@ export default defineComponent({
 
 	},
 	methods: {
+		async contratar() {
+			let clientId = JSON.parse(localStorage.getItem('clientDados'))['client_id']
+			let request = {
+				"client_id": clientId,
+				"final_distance": this.dist,
+				"final_price": this.dist *  this.installerSel.price_per_km,
+				"installer_id": this.installerSel.id,
+				"plan_id": localStorage.getItem('planId'),
+				"rating": this.installerSel.rating
+			}
+			const response = await post("https://connet-app.herokuapp.com/connet-app/api/process/v1/client/request", request);
+			if (response.status === 200){
+				this.$router.push('/Order')
+			}
+		},
 		openCard(position) {
 			this.openedMarkerID = position.id;
 			this.latitude = position.position.lat;
@@ -235,18 +253,28 @@ export default defineComponent({
 		setInstaller(makers) {
 			this.center = { lat: makers.lat, lng: makers.lng };
 			this.zoom = 12;
-		},
-		getMyLocation() {
-			navigator.geolocation.getCurrentPosition(
-				(position) => {
-					this.latitude = position.coords.latitude;
-					this.longitude = position.coords.longitude;
-				},
-				(error) => {
-					console.log(error.message);
-				}
-			);
-		},
+			let latitude = localStorage.getItem("latitude")
+			let longitude = localStorage.getItem("longitude")
+			console.log(parseFloat(latitude))
+			console.log(parseFloat(longitude))
+			this.dist = this.calc(makers.lat, makers.lng, parseFloat(latitude), parseFloat(longitude))
+		}, calc(lat1, lon1, lat2, lon2){
+			console.log(lat1, lon1, lat2, lon2)
+			var R = 6371; // km
+			var dLat = this.toRad(lat2-lat1);
+			var dLon = this.toRad(lon2-lon1);
+			var lat1 = this.toRad(lat1);
+			var lat2 = this.toRad(lat2);
+
+			var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+				Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+			var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+			var d = R * c;
+			console.log("distancia:"+d)
+			return d.toFixed(2);
+		}, toRad(Value){
+			return Value * Math.PI / 180;
+		}
 	},
 });
 </script>

@@ -109,11 +109,8 @@
 				:modules="modules"
 			>
 				<swiper-slide
-					v-for="index in this.plans"
-					:key="index"
 					class="slide cardAzul"
 					@click="this.planSelected = 'Satélite'"
-
 				>
 					<div class="centerObj">
 						<img
@@ -121,10 +118,46 @@
 							src="~assets/Sat.svg"
 							style="height: 40px"
 						/>
-						<p v-if="index['type_of_internet'] === 'sat'">Satélite</p>
-						<p v-else-if="index['type_of_internet'] === 'wire'">Fibra</p>
-						<p v-else-if="index['type_of_internet'] === 'radio'">Rádio</p>
-						<p v-else-if="index['type_of_internet'] === 'cable'">Cabo</p>
+						<p>Satélite</p>
+					</div>
+				</swiper-slide>
+				<swiper-slide
+					class="slide cardAzul"
+					@click="this.planSelected = 'Cabo'"
+				>
+					<div class="centerObj">
+						<img
+							alt="Icone Cabo"
+							src="~assets/Cab.svg"
+							style="height: 40px"
+						/>
+						<p>Cabo</p>
+					</div>
+				</swiper-slide>
+				<swiper-slide
+					class="slide cardAzul"
+					@click="this.planSelected = 'Rádio'"
+				>
+					<div class="centerObj">
+						<img
+							alt="Icone Radio"
+							src="~assets/Rad.svg"
+							style="height: 40px"
+						/>
+						<p>Radio</p>
+					</div>
+				</swiper-slide>
+				<swiper-slide
+					class="slide cardAzul"
+					@click="this.planSelected = 'Fibra'"
+				>
+					<div class="centerObj">
+						<img
+							alt="Icone Wire"
+							src="~assets/Wir.svg"
+							style="height: 40px"
+						/>
+						<p>Cabo</p>
 					</div>
 				</swiper-slide>
 			</swiper>
@@ -213,6 +246,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Installers from "src/service/installers";
 import Plan from "src/service/Plan";
+import {post, put} from "axios";
 
 export default defineComponent({
 	name: "PlanScreen",
@@ -225,14 +259,35 @@ export default defineComponent({
 			modules: [Pagination],
 			planSelected: "Satélite",
 			plans:[],
-			planType:[]
+			planType:[],
+			user: JSON.parse(localStorage.getItem('clientDados'))
 		};
 	},
 	methods:{
-		selectPlan(planId){
+		async selectPlan(planId) {
+			this.getMyLocation();
+			this.user.plan_id = planId
+			const response = await put("https://connet-app.herokuapp.com/connet-app/api/connet/v1/client/clients/"+this.user.client_id, this.user);
+			if (response.status === 200) {
+				this.$router.push('/Order')
+			}
 			localStorage.setItem("planId", JSON.stringify(planId))
+			localStorage.setItem(this.user.plan_id, JSON.stringify(planId))
 			this.$router.push('/map')
-		}
+		},
+		getMyLocation() {
+			navigator.geolocation.getCurrentPosition(
+				(position) => {
+					this.latitude = position.coords.latitude;
+					this.longitude = position.coords.longitude;
+					localStorage.setItem("latitude", this.latitude)
+					localStorage.setItem("longitude", this.longitude)
+				},
+				(error) => {
+					console.log(error.message);
+				}
+			);
+		},
 	},
 	mounted() {
 		Plan.listPlanUf(JSON.parse(localStorage.getItem('clientDados'))['state'])

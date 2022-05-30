@@ -49,7 +49,8 @@ export default defineComponent({
     };
   },
 	mounted() {
-		ProcessService.listProcessClient("c207f069-5ed9-4cad-b874-1a23a65cafc5")
+		let clientId = JSON.parse(localStorage.getItem('clientDados'))['client_id']
+		ProcessService.listProcessClient(clientId)
 			.then(response => {
 				this.process = response.data
 				console.log(response.data)

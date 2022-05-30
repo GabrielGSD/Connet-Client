@@ -22,7 +22,7 @@
 						letter-spacing: -1px;
 					"
 				>
-					{{ installer.final_price }}
+					{{ installer.price_per_km }}
 					<span
 						style="
 							color: #999999;
@@ -30,7 +30,7 @@
 							margin-left: 5px;
 							letter-spacing: 0px;
 						"
-						>/instalação</span
+						>Reais por Km percorrido</span
 					>
 				</q-item-label>
 				<q-item-label caption class="center dados">
